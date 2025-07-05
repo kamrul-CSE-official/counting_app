@@ -10,6 +10,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int number = 0;
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -19,25 +20,42 @@ class _HomePageState extends State<HomePage> {
           "Home Page",
           style: TextStyle(color: Colors.white, fontSize: 20.0),
         ),
-        actions: [
+        actions: const [
           Icon(Icons.search, color: Colors.white),
           Icon(Icons.more_vert, color: Colors.white),
         ],
       ),
       body: Center(
         child: Text(
-          "Bismillah- $number",
+          "Bismillah: $number",
           style: TextStyle(color: Colors.black, fontSize: 30),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.purple,
-        child: Icon(Icons.add, color: Colors.white),
-        onPressed: () {
-          setState(() {
-            number++;
-          });
-        },
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FloatingActionButton(
+            backgroundColor: Colors.purple,
+            heroTag: "increment",
+            child: Icon(Icons.add, color: Colors.white),
+            onPressed: () {
+              setState(() {
+                number++;
+              });
+            },
+          ),
+          const SizedBox(height: 10),
+          FloatingActionButton(
+            backgroundColor: Colors.purple,
+            heroTag: "decrement",
+            child: Icon(Icons.remove, color: Colors.white),
+            onPressed: () {
+              setState(() {
+                number--;
+              });
+            },
+          ),
+        ],
       ),
     );
   }
